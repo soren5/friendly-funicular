@@ -2,13 +2,13 @@ sh ipconfig-router.sh
 
 #1.1.1 DNS name resolution requests:
 
-iptables -A INPUT -s 193.137.16.75 -p udp ---dport domain -j ACCEPT
+iptables -A INPUT -s 193.137.16.75 -p udp --dport domain -j ACCEPT
 
 #1.1.2 SSH communications with the router system, if originated at the internal network
 #or at the VPN gateway (vpn-gw):
 
-iptables -A INPUT -s 192.168.10.0/24 -p tcp ---dport ssh -j ACCEPT
-iptables -A INPUT -s 23.214.219.130 -p tcp  ---dport ssh -j ACCEPT
+iptables -A INPUT -s 192.168.10.0/24 -p tcp --dport ssh -j ACCEPT
+iptables -A INPUT -s 23.214.219.130 -p tcp  --dport ssh -j ACCEPT
 
 #2 Drop all communications between networks, except:                
 #2.1 Domain name resolutions using the dns server.
@@ -40,8 +40,8 @@ iptables -A FORWARD -s 23.214.219.131 -p tcp --sport 993 -j ACCEPT
 iptables -A FORWARD -d 23.214.219.133 -p tcp --dport 443 -j ACCEPT
 iptables -A FORWARD -d 23.214.219.133 -p tcp --dport 80 -j ACCEPT
 
-iptables -A FORWARD -s 23.214.219.133 -p tcp -sport 443 -j ACCEPT
-iptables -A FORWARD -s 23.214.219.133 -p tcp -sport 80 -j ACCEPT
+iptables -A FORWARD -s 23.214.219.133 -p tcp --sport 443 -j ACCEPT
+iptables -A FORWARD -s 23.214.219.133 -p tcp --sport 80 -j ACCEPT
 
 #2.7 OpenVPN connections to the vpn-gw server.
 iptables -A FORWARD -s 23.214.219.130 -p udp --sport 1194 -j ACCEPT
