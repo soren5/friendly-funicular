@@ -21,8 +21,8 @@ iptables -A INPUT -s 23.214.219.130 -p tcp  ---dport ssh -j ACCEPT
 iptables -A FORWARD -d 23.214.219.134 -p tcp --dport 25 -j ACCEPT
 iptables -A FORWARD -d 23.214.219.134 -p tcp --dport 587 -j ACCEPT
 
-iptables -A FORWARD -s 23.214.219.134 -p tcp -sport 25 -j ACCEPT
-iptables -A FORWARD -s 23.214.219.134 -p tcp -sport 587 -j ACCEPT
+iptables -A FORWARD -s 23.214.219.134 -p tcp --sport 25 -j ACCEPT
+iptables -A FORWARD -s 23.214.219.134 -p tcp --sport 587 -j ACCEPT
 
 
 #2.5 POP and IMAP connections to the mail server.
@@ -31,10 +31,10 @@ iptables -A FORWARD -d 23.214.219.131 -p tcp --dport 995 -j ACCEPT
 iptables -A FORWARD -d 23.214.219.131 -p tcp --dport 143 -j ACCEPT
 iptables -A FORWARD -d 23.214.219.131 -p tcp --dport 993 -j ACCEPT
 
-iptables -A FORWARD -s 23.214.219.131 -p tcp -sport 110 -j ACCEPT
-iptables -A FORWARD -s 23.214.219.131 -p tcp -sport 995 -j ACCEPT
-iptables -A FORWARD -s 23.214.219.131 -p tcp -sport 143 -j ACCEPT
-iptables -A FORWARD -s 23.214.219.131 -p tcp -sport 993 -j ACCEPT
+iptables -A FORWARD -s 23.214.219.131 -p tcp --sport 110 -j ACCEPT
+iptables -A FORWARD -s 23.214.219.131 -p tcp --sport 995 -j ACCEPT
+iptables -A FORWARD -s 23.214.219.131 -p tcp --sport 143 -j ACCEPT
+iptables -A FORWARD -s 23.214.219.131 -p tcp --sport 993 -j ACCEPT
 
 #2.6 HTTP and HTTPS connections to the www server.
 iptables -A FORWARD -d 23.214.219.133 -p tcp --dport 443 -j ACCEPT
