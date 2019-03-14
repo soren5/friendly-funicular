@@ -7,9 +7,8 @@ iptables -A INPUT -s 193.137.16.75 -p udp --dport domain -j ACCEPT
 #1.1.2 SSH communications with the router system, if originated at the internal network
 #or at the VPN gateway (vpn-gw):
 
-iptables -A INPUT-s 192.168.10.0/24 -p tcp --dport ssh -j ACCEPT
+iptables -A INPUT -s 192.168.10.0/24 -p tcp --dport ssh -j ACCEPT
 iptables -A INPUT -s 23.214.219.130 -p tcp  --dport ssh -j ACCEPT
-iptables -P INPUT DROP
 
 #2 Drop all communications between networks, except:                
 #2.1 Domain name resolutions using the dns server.
