@@ -1,4 +1,5 @@
 ifconfig enp0s8 23.214.219.134 netmask 255.255.255.0 up
+route add default gw 23.214.219.254
 
 #IPs DMZ -
 #

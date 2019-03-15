@@ -1,5 +1,7 @@
 sh ipconfig-router.sh
 
+sysctl -w net.ipv4.ip_forward=1
+iptables -F
 #1.1.1 DNS name resolution requests:
 
 iptables -A INPUT -s 193.137.16.75 -p udp --dport domain -j ACCEPT

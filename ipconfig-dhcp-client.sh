@@ -1,5 +1,5 @@
 ifconfig enp0s8 192.168.10.4 netmask 255.255.255.0 up
-
+route add default gw 192.168.10.254
 #IPs DMZ -
 #
 #23.214.219.130 - vpn-gw
