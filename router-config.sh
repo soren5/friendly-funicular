@@ -5,7 +5,7 @@ sysctl -w net.ipv4.ip_forward=1
 iptables -F
 #1.1.1 DNS name resolution requests:
 
-iptables -p udp --dport domain -j ACCEPT
+iptables -A INPUT -p udp --dport domain -j ACCEPT
 
 #1.1.2 SSH communications with the router system, if originated at the internal network
 #or at the VPN gateway (vpn-gw):
