@@ -110,6 +110,12 @@ echo 37
 
 #3.1 FTP connections (in passive and active modes) to the ftp server.
 iptables -A FORWARD -s 87.248.214.0/24 -d 87.248.214.97 -p tcp --dport 21  -j ACCEPT 
+iptables -A FORWARD -s 87.248.214.0/24 -d 87.248.214.97 -p tcp --dport 20  -j ACCEPT 
+iptables -A FORWARD -s 87.248.214.0/24 -d 87.248.214.97 -p tcp --sport 1024:  -j ACCEPT 
+
+iptables -A FORWARD -d 87.248.214.0/24 -s 87.248.214.97 -p tcp --sport 21  -j ACCEPT 
+iptables -A FORWARD -d 87.248.214.0/24 -s 87.248.214.97 -p tcp --sport 20  -j ACCEPT 
+iptables -A FORWARD -d 87.248.214.0/24 -s 87.248.214.97 -p tcp --dport 1024:  -j ACCEPT 
 echo 38 
 iptables -t nat -A PREROUTING -s 87.248.214.0/24 -d 87.248.214.97 -p tcp --dport 21 -m conntrack --ctstate NEW,ESTABLISHED -j DNAT --to-destination 192.168.10.2 
 echo 39 
