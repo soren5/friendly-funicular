@@ -1,5 +1,8 @@
 sh ipconfig-router.sh
 
+modprobe nf_nat_ftp
+modprobe nf_conntrack_ftp
+
 sysctl -w net.ipv4.ip_forward=1
 
 iptables -F
@@ -104,35 +107,14 @@ echo 34
 iptables -A FORWARD -s 87.248.214.97 -d 87.248.214.2 -p tcp --dport ssh -j ACCEPT 
 echo 35 
 iptables -t nat -A PREROUTING -s 87.248.214.2 -d 87.248.214.97 -p tcp --dport ssh -j DNAT --to-destination 192.168.10.3
-echo 36 
-#iptables -t nat -A POSTROUTING -s 192.168.10.3 -d 87.248.214.2 -j SNAT --to-source 87.248.214.97?
-echo 37 
 
 #3.1 FTP connections (in passive and active modes) to the ftp server.
-iptables -A FORWARD -s 87.248.214.0/24 -d 87.248.214.97 -p tcp --dport 21  -j ACCEPT 
-iptables -A FORWARD -s 87.248.214.0/24 -d 87.248.214.97 -p tcp --dport 20  -j ACCEPT 
-iptables -A FORWARD -s 87.248.214.0/24 -d 87.248.214.97 -p tcp --sport 1024:  -j ACCEPT 
+iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i enp0s10 -d 87.248.214.97 -p tcp --dport 21  -j ACCEPT 
+iptables -t nat -A PREROUTING -i enp0s10 -d 87.248.214.97 -p tcp --dport 21 -j DNAT --to-destination 192.168.10.2 
 
-iptables -A FORWARD -d 87.248.214.0/24 -s 87.248.214.97 -p tcp --sport 21  -j ACCEPT 
-iptables -A FORWARD -d 87.248.214.0/24 -s 87.248.214.97 -p tcp --sport 20  -j ACCEPT 
-iptables -A FORWARD -d 87.248.214.0/24 -s 87.248.214.97 -p tcp --dport 1024:  -j ACCEPT 
-echo 38 
-iptables -t nat -A PREROUTING -s 87.248.214.0/24 -d 87.248.214.97 -p tcp --dport 21 -m conntrack --ctstate NEW,ESTABLISHED -j DNAT --to-destination 192.168.10.2 
-echo 39 
-iptables -t nat -A PREROUTING -s 87.248.214.0/24 -d 87.248.214.97 -p tcp --dport 20 -m conntrack --ctstate ESTABLISHED -j DNAT --to-destination 192.168.10.2 
-echo 40 
-iptables -t nat -A PREROUTING -s 87.248.214.0/24 -d 87.248.214.97 -p tcp --sport 1024: -m conntrack --ctstate ESTABLISHED,RELATED -j DNAT --to-destination 192.168.10.2 
-echo 41 
-
-iptables -t nat -A POSTROUTING -s 192.168.10.2 -d 87.248.214.0/24 -p tcp --sport 21 -m conntrack --ctstate ESTABLISHED -j SNAT --to-source 87.248.214.97
-echo 42 
-iptables -t nat -A POSTROUTING -s 192.168.10.2 -d 87.248.214.0/24 -p tcp --sport 20 -m conntrack --ctstate ESTABLISHED,RELATED -j SNAT --to-source 87.248.214.97
-echo 43 
-iptables -t nat -A POSTROUTING -s 192.168.10.2 -d 87.248.214.0/24 -p tcp --sport 21 -m conntrack --ctstate ESTABLISHED -j SNAT --to-source 87.248.214.97
-echo 44 
-iptables -t nat -A POSTROUTING -s 192.168.10.2 -d 87.248.214.0/24 -p tcp --sport 1024:65535 -m conntrack --ctstate ESTABLISHED -j SNAT --to-source 87.248.214.97
-echo 45 
-
+iptables -A FORWARD -i enp0s9 -o enp0s10 -p tcp --dport 21 -j ACCEPT
+iptables -t nat -A POSTROUTING -i enp0s9 -o enp0s10 -p tcp --dport 21 -j SNAT --to-source 87.248.214.97
 
 #3.2 SSH connections to the datastore server, but only if originated at the eden or dns2 servers.
 iptables -A FORWARD -s 87.248.214.1 -d 87.248.214.97 -p tcp --dport ssh -j ACCEPT 
