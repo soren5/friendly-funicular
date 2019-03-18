@@ -113,9 +113,6 @@ iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -i enp0s10 -d 192.168.10.2 -p tcp --dport 21  -j ACCEPT 
 iptables -t nat -A PREROUTING -i enp0s10 -d 87.248.214.97 -p tcp --dport 21 -j DNAT --to-destination 192.168.10.2 
 
-iptables -A FORWARD -i enp0s9 -o enp0s10 -p tcp --dport 21 -j ACCEPT
-iptables -t nat -A POSTROUTING -i enp0s9 -o enp0s10 -p tcp --dport 21 -j SNAT --to-source 87.248.214.97
-
 #3.2 SSH connections to the datastore server, but only if originated at the eden or dns2 servers.
 iptables -A FORWARD -s 87.248.214.1 -d 87.248.214.97 -p tcp --dport ssh -j ACCEPT 
 iptables -A FORWARD -s 87.248.214.97 -d 87.248.214.1 -p tcp --dport ssh -j ACCEPT 
@@ -126,6 +123,23 @@ iptables -A FORWARD -s 87.248.214.2 -d 87.248.214.97 -p tcp --dport ssh -j ACCEP
 iptables -A FORWARD -s 87.248.214.97 -d 87.248.214.2 -p tcp --dport ssh -j ACCEPT 
 iptables -t nat -A PREROUTING -s 87.248.214.2 -d 87.248.214.97 -p tcp --dport ssh -j DNAT --to-destination 192.168.10.3
 #iptables -t nat -A POSTROUTING -s 192.168.10.3 -d 87.248.214.2 -j SNAT --to-source 87.248.214.97?
+
+#4.1 Domain name resolutions using DNS.
+
+iptables -A FORWARD -i enp0s9 -o enp0s10 -p tcp --dport domain -j ACCEPT
+iptables -t nat -A POSTROUTING -d 192.168.10.0/24 -o enp0s10  -p tcp --dport domain -j SNAT --to-source 87.248.214.97
+#4.2 HTTP, HTTPS and SSH connections.
+iptables -A FORWARD -i enp0s9 -o enp0s10 -p tcp --dport 443 -j ACCEPT
+iptables -A FORWARD -i enp0s9 -o enp0s10 -p tcp --dport ssh -j ACCEPT
+iptables -A FORWARD -i enp0s9 -o enp0s10 -p tcp --dport 80 -j ACCEPT
+
+iptables -t nat -A POSTROUTING -d 192.168.10.0/24 -o enp0s10  -p tcp --dport 443 -j SNAT --to-source 87.248.214.97
+iptables -t nat -A POSTROUTING -d 192.168.10.0/24 -o enp0s10  -p tcp --dport ssh -j SNAT --to-source 87.248.214.97
+iptables -t nat -A POSTROUTING -d 192.168.10.0/24 -o enp0s10 -p tcp --dport 80 -j SNAT --to-source 87.248.214.97
+
+#4.3 FTP connections (in passive and active modes) to external FTP servers.
+iptables -A FORWARD -i enp0s9 -o enp0s10 -p tcp --dport 21 -j ACCEPT
+iptables -t nat -A POSTROUTING -i enp0s9 -o enp0s10 -p tcp --dport 21 -j SNAT --to-source 87.248.214.97
 
 iptables -P INPUT DROP
 echo 46 
