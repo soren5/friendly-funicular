@@ -19,19 +19,19 @@ echo 4
 
 #2 Drop all communications between networks, except:                
 #2.1 Domain name resolutions using the dns server.
-iptables -A INPUT -s 23.214.219.132 --dport domain -j ACCEPT
+iptables -A INPUT -s 23.214.219.132 -p udp --dport domain -j ACCEPT
 echo 5
     #iptables -A FORWARD -s *.*.*.* -p dns -j ACCEPT
 #2.2 The dns server should be able to resolve names using DNS servers on the Internet (dns2 and also others)?
-iptables -A FORWARD -s 23.214.219.132 -p udp --dport domain -d 87.248.214.0/24
+iptables -A FORWARD -s 23.214.219.132 -p udp --dport domain -d 87.248.214.0/24 -j ACCEPT
 echo 6
-iptables -A FORWARD -s 87.248.214.0/24 -p udp --dport domain -d 23.214.219.132
+iptables -A FORWARD -s 87.248.214.0/24 -p udp --dport domain -d 23.214.219.132 -j ACCEPT
 echo 7
 
 #2.3 The dns and dns2 servers should be able to synchronize the contents of DNS zones?
-iptables -A FORWARD -s 23.214.219.132 -p tcp --dport domain -d 87.248.214.1
+iptables -A FORWARD -s 23.214.219.132 -p tcp --dport domain -d 87.248.214.1 -j ACCEPT
 echo 8
-iptables -A FORWARD -s 87.248.214.1 -p tcp --dport domain -d 23.214.219.132
+iptables -A FORWARD -s 87.248.214.1 -p tcp --dport domain -d 23.214.219.132 -j ACCEPT 
 echo 9
 
 #2.4 SMTP connections to the smtp server.
@@ -90,26 +90,26 @@ echo 28
 iptables -A FORWARD -d 23.214.219.130 -s 192.168.10.3 -p tcp --sport 5432 -j ACCEPT
 echo 29
 
-iptables -A FORWARD -s 87.248.214.1 -d 87.248.214.97 --dport ssh -j ACCEPT 
+iptables -A FORWARD -s 87.248.214.1 -d 87.248.214.97 -p tcp --dport ssh -j ACCEPT 
 echo 30 
-iptables -A FORWARD -s 87.248.214.97 -d 87.248.214.1 --dport ssh -j ACCEPT 
+iptables -A FORWARD -s 87.248.214.97 -d 87.248.214.1 -p tcp --dport ssh -j ACCEPT 
 echo 31 
-iptables -t nat -A PREROUTING -s 87.248.214.1 -d 87.248.214.97 --dport ssh -j DNAT --to-destination 192.168.10.3
+iptables -t nat -A PREROUTING -s 87.248.214.1 -d 87.248.214.97 -p tcp --dport ssh -j DNAT --to-destination 192.168.10.3
 echo 32 
 #iptables -t nat -A POSTROUTING -s 192.168.10.3 -d 87.248.214.1 -j SNAT --to-source 87.248.214.97?
 echo 33 
 
-iptables -A FORWARD -s 87.248.214.2 -d 87.248.214.97 --dport ssh -j ACCEPT 
+iptables -A FORWARD -s 87.248.214.2 -d 87.248.214.97 -p tcp --dport ssh -j ACCEPT 
 echo 34 
-iptables -A FORWARD -s 87.248.214.97 -d 87.248.214.2 --dport ssh -j ACCEPT 
+iptables -A FORWARD -s 87.248.214.97 -d 87.248.214.2 -p tcp --dport ssh -j ACCEPT 
 echo 35 
-iptables -t nat -A PREROUTING -s 87.248.214.2 -d 87.248.214.97 --dport ssh -j DNAT --to-destination 192.168.10.3
+iptables -t nat -A PREROUTING -s 87.248.214.2 -d 87.248.214.97 -p tcp --dport ssh -j DNAT --to-destination 192.168.10.3
 echo 36 
 #iptables -t nat -A POSTROUTING -s 192.168.10.3 -d 87.248.214.2 -j SNAT --to-source 87.248.214.97?
 echo 37 
 
 #FTP
-iptables -A FORWARD -s 87.248.214.0/24 -d 87.248.214.97 -p tcp -dport 21  -j ACCEPT 
+iptables -A FORWARD -s 87.248.214.0/24 -d 87.248.214.97 -p tcp --dport 21  -j ACCEPT 
 echo 38 
 iptables -t nat -A PREROUTING -s 87.248.214.0/24 -d 87.248.214.97 -p tcp --dport 21 -m conntrack --ctstate NEW,ESTABLISHED -j DNAT --to-destination 192.168.10.2 
 echo 39 
@@ -120,7 +120,7 @@ echo 41
 
 iptables -t nat -A POSTROUTING -s 192.168.10.2 -d 87.248.214.0/24 -p tcp --sport 21 -m conntrack --ctstate ESTABLISHED -j SNAT --to-source 87.248.214.97
 echo 42 
-iptables -t nat -A POSTROUTING -s 192.168.10.2 -d 87.248.214.0/24 -p tcp --sport 20 -m conntrack --ctstate ESTABLISHED, RELATED -j SNAT --to-source 87.248.214.97
+iptables -t nat -A POSTROUTING -s 192.168.10.2 -d 87.248.214.0/24 -p tcp --sport 20 -m conntrack --ctstate ESTABLISHED,RELATED -j SNAT --to-source 87.248.214.97
 echo 43 
 iptables -t nat -A POSTROUTING -s 192.168.10.2 -d 87.248.214.0/24 -p tcp --sport 21 -m conntrack --ctstate ESTABLISHED -j SNAT --to-source 87.248.214.97
 echo 44 
