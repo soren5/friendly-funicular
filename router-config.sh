@@ -110,7 +110,7 @@ iptables -t nat -A PREROUTING -s 87.248.214.2 -d 87.248.214.97 -p tcp --dport ss
 
 #3.1 FTP connections (in passive and active modes) to the ftp server.
 iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -A FORWARD -i enp0s10 -d 87.248.214.97 -p tcp --dport 21  -j ACCEPT 
+iptables -A FORWARD -i enp0s10 -d 192.168.10.2 -p tcp --dport 21  -j ACCEPT 
 iptables -t nat -A PREROUTING -i enp0s10 -d 87.248.214.97 -p tcp --dport 21 -j DNAT --to-destination 192.168.10.2 
 
 iptables -A FORWARD -i enp0s9 -o enp0s10 -p tcp --dport 21 -j ACCEPT
