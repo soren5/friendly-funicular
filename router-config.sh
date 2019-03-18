@@ -129,14 +129,14 @@ echo 45
 
 
 #3.2 SSH connections to the datastore server, but only if originated at the eden or dns2 servers.
-iptables -A FORWARD -s 87.248.214.1 -d 87.248.214.97 --dport ssh -j ACCEPT 
-iptables -A FORWARD -s 87.248.214.97 -d 87.248.214.1 --dport ssh -j ACCEPT 
-iptables -t nat -A PREROUTING -s 87.248.214.1 -d 87.248.214.97 --dport ssh -j DNAT --to-destination 192.168.10.3
+iptables -A FORWARD -s 87.248.214.1 -d 87.248.214.97 -p tcp --dport ssh -j ACCEPT 
+iptables -A FORWARD -s 87.248.214.97 -d 87.248.214.1 -p tcp --dport ssh -j ACCEPT 
+iptables -t nat -A PREROUTING -s 87.248.214.1 -d 87.248.214.97 -p tcp --dport ssh -j DNAT --to-destination 192.168.10.3
 #iptables -t nat -A POSTROUTING -s 192.168.10.3 -d 87.248.214.1 -j SNAT --to-source 87.248.214.97?
 
-iptables -A FORWARD -s 87.248.214.2 -d 87.248.214.97 --dport ssh -j ACCEPT 
-iptables -A FORWARD -s 87.248.214.97 -d 87.248.214.2 --dport ssh -j ACCEPT 
-iptables -t nat -A PREROUTING -s 87.248.214.2 -d 87.248.214.97 --dport ssh -j DNAT --to-destination 192.168.10.3
+iptables -A FORWARD -s 87.248.214.2 -d 87.248.214.97 -p tcp --dport ssh -j ACCEPT 
+iptables -A FORWARD -s 87.248.214.97 -d 87.248.214.2 -p tcp --dport ssh -j ACCEPT 
+iptables -t nat -A PREROUTING -s 87.248.214.2 -d 87.248.214.97 -p tcp --dport ssh -j DNAT --to-destination 192.168.10.3
 #iptables -t nat -A POSTROUTING -s 192.168.10.3 -d 87.248.214.2 -j SNAT --to-source 87.248.214.97?
 
 iptables -P INPUT DROP
