@@ -53,9 +53,9 @@ policy          = policy_match
 # resemblence to the CA cert
 #
 [ policy_match ]
-countryName             = match         # Must be the same as the CA
-stateOrProvinceName     = match         # Must be the same as the CA
-organizationName        = match         # Must be the same as the CA
+countryName             = optional	 # Must be the same as the CA
+stateOrProvinceName     = optional 	# Must be the same as the CA
+organizationName        = optional 	# Must be the same as the CA
 organizationalUnitName  = optional      # not required
 commonName              = supplied      # must be there, whatever it is
 emailAddress            = optional      # not required
@@ -91,7 +91,7 @@ req_extensions		= v3_req # The extensions to add to req's
 # MASK:XXXX a literal mask value.
 # WARNING: current versions of Netscape crash on BMPStrings or UTF8Strings
 # so use this option with caution!
-string_mask = nombstr
+string_mask = pkix
 
 
 ####################################################################
@@ -132,9 +132,10 @@ emailAddress_max                = 64
 ####################################################################
 # Extensions for when we sign normal certs (specified as default)
 [ usr_cert ]
-
+authorityInfoAccess = OCSP;URI:http://127.0.0.1:8080
 # User certs aren't CAs, by definition
 basicConstraints=CA:false
+
 
 # Here are some examples of the usage of nsCertType. If it is omitted
 # the certificate can be used for anything *except* object signing.
@@ -184,6 +185,12 @@ authorityKeyIdentifier=keyid:always,issuer:always
 #basicConstraints = critical,CA:true
 # So we do this instead.
 basicConstraints = CA:true
+
+[ v3_OCSP ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = OCSPSigning
+
 
 # Key usage: this is typical for a CA certificate. However since it will
 # prevent it being used as an test self-signed certificate it is best

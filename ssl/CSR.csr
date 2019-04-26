@@ -1,0 +1,41 @@
+Certificate Request:
+    Data:
+        Version: 0 (0x0)
+        Subject: C=PT, ST=COIMBRA, L=COIMBRA, O=UC, OU=DEI, CN=B/emailAddress=B@B.COM
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (1024 bit)
+                Modulus:
+                    00:f1:ec:12:aa:53:42:d0:3c:cb:89:8c:36:f0:d2:
+                    b7:16:de:4f:21:7b:5b:45:7b:91:cd:34:3c:f5:96:
+                    33:dc:2d:6f:26:5f:ca:41:d5:de:91:f0:ae:38:e1:
+                    44:12:a4:d7:90:af:f5:12:54:2e:14:77:8d:bf:09:
+                    92:d5:75:47:db:cb:95:c5:d8:e6:23:45:02:96:b4:
+                    c5:e4:06:fc:c7:29:04:70:3d:a3:21:53:6d:6c:b4:
+                    53:d9:97:07:d3:09:04:8f:da:94:09:67:2c:ce:26:
+                    7f:3a:32:fc:21:97:8e:fc:40:e8:b2:af:6d:c6:44:
+                    62:d4:6a:ab:0b:4f:8f:ff:17
+                Exponent: 65537 (0x10001)
+        Attributes:
+            a0:00
+    Signature Algorithm: sha256WithRSAEncryption
+         38:c2:3e:c5:00:97:92:05:a5:4c:16:93:07:47:ca:ae:09:61:
+         7a:14:cf:3f:db:24:3a:d2:22:d8:e0:0b:b4:31:8b:c7:78:00:
+         35:9e:e7:f9:e8:4b:79:e3:bf:0b:9a:25:22:58:60:58:97:de:
+         77:3b:bb:fb:91:48:8f:60:6f:12:19:b4:88:b7:05:b6:16:b5:
+         ed:bd:bc:ad:59:5c:f3:6b:b7:2d:b4:42:0a:4e:05:ed:40:3c:
+         bb:14:40:fe:8f:9e:25:be:b6:db:20:63:b6:cd:1a:5a:e8:5c:
+         c7:52:fb:bb:a8:e0:4e:b1:76:bd:8b:7e:e9:93:b4:9c:db:37:
+         47:e8
+-----BEGIN CERTIFICATE REQUEST-----
+MIIBsDCCARkCAQAwcDELMAkGA1UEBhMCUFQxEDAOBgNVBAgTB0NPSU1CUkExEDAO
+BgNVBAcTB0NPSU1CUkExCzAJBgNVBAoTAlVDMQwwCgYDVQQLEwNERUkxCjAIBgNV
+BAMTAUIxFjAUBgkqhkiG9w0BCQEWB0JAQi5DT00wgZ8wDQYJKoZIhvcNAQEBBQAD
+gY0AMIGJAoGBAPHsEqpTQtA8y4mMNvDStxbeTyF7W0V7kc00PPWWM9wtbyZfykHV
+3pHwrjjhRBKk15Cv9RJULhR3jb8JktV1R9vLlcXY5iNFApa0xeQG/McpBHA9oyFT
+bWy0U9mXB9MJBI/alAlnLM4mfzoy/CGXjvxA6LKvbcZEYtRqqwtPj/8XAgMBAAGg
+ADANBgkqhkiG9w0BAQsFAAOBgQA4wj7FAJeSBaVMFpMHR8quCWF6FM8/2yQ60iLY
+4Au0MYvHeAA1nuf56Et5478LmiUiWGBYl953O7v7kUiPYG8SGbSItwW2FrXtvbyt
+WVzza7cttEIKTgXtQDy7FED+j54lvrbbIGO2zRpa6FzHUvu7qOBOsXa9i37pk7Sc
+2zdH6A==
+-----END CERTIFICATE REQUEST-----
