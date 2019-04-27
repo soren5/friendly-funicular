@@ -1,0 +1,10 @@
+Warning: pasting the following URL into your browser exposes the OTP secret to Google:
+  https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/road_warrior_client@localhost.localdomain%3Fsecret%3DXSDGF24C5DMMELGSZ465GWOMWY%26issuer%3Dlocalhost.localdomain
+Your new secret key is: XSDGF24C5DMMELGSZ465GWOMWY
+Your verification code for code 1 is 487962
+Your emergency scratch codes are:
+  33173844
+  15461693
+  16834815
+  25914227
+  35908254
