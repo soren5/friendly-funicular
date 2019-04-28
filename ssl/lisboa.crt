@@ -1,0 +1,61 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 4102 (0x1006)
+    Signature Algorithm: sha1WithRSAEncryption
+        Issuer: C=PT, ST=COIMBRA, L=COIMBRA, O=UC, OU=DEI, CN=A/emailAddress=A
+        Validity
+            Not Before: Apr 28 16:18:59 2019 GMT
+            Not After : Apr 27 16:18:59 2020 GMT
+        Subject: C=PT, ST=COIMBRA, O=UC, OU=DEI, CN=T/emailAddress=T@T.COM
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (1024 bit)
+                Modulus:
+                    00:f2:48:db:65:3d:6c:00:9e:a2:88:74:8b:fc:1b:
+                    a1:0a:38:df:b1:5d:ba:35:63:e6:0a:06:1b:c1:3a:
+                    b8:f0:48:92:aa:17:04:31:26:25:33:cf:ce:2d:97:
+                    d4:78:49:6f:06:cf:e6:94:bf:9c:7b:0b:07:e7:b8:
+                    4d:b6:99:38:d5:71:2b:85:a3:5f:f2:c1:c6:6f:97:
+                    6c:3e:8d:0f:8d:9c:00:b6:2b:78:f7:c8:35:e6:a2:
+                    e0:09:4c:de:48:4e:a7:96:13:cb:02:db:ff:b0:2e:
+                    ce:56:92:0c:ef:04:ba:41:f3:20:13:72:12:e2:23:
+                    8e:42:4f:4d:ea:a0:18:17:61
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            Authority Information Access: 
+                OCSP - URI:http://127.0.0.1:8080
+
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                ED:86:7A:36:76:C8:C3:FC:6C:40:24:25:DA:95:A8:E0:38:10:DB:B4
+            X509v3 Authority Key Identifier: 
+                keyid:18:EA:69:0F:75:B8:81:56:9C:3A:90:E6:5E:86:87:A5:D8:F7:AF:42
+
+    Signature Algorithm: sha1WithRSAEncryption
+         58:51:9e:fb:52:92:2c:8b:2a:ea:f2:4a:ca:c5:2b:02:f7:82:
+         73:45:83:90:d3:fe:6e:27:a0:54:19:00:f9:ef:93:77:89:3a:
+         22:c1:0e:0a:1b:6d:57:29:28:ea:08:54:20:f5:24:c5:6d:80:
+         61:dc:e0:e6:dd:5c:b7:cd:ba:2e:6c:61:4c:4e:1f:df:6f:7b:
+         f0:26:2c:f0:e4:92:2f:57:ca:5f:e1:d5:02:df:b5:8d:9e:b6:
+         f2:d2:f3:f4:3f:24:62:54:a3:89:1d:03:24:e6:78:25:0c:e8:
+         06:d4:00:91:d3:15:e6:86:ec:1c:47:23:b2:39:35:e7:dc:1e:
+         b4:2a
+-----BEGIN CERTIFICATE-----
+MIICwDCCAimgAwIBAgICEAYwDQYJKoZIhvcNAQEFBQAwajELMAkGA1UEBhMCUFQx
+EDAOBgNVBAgTB0NPSU1CUkExEDAOBgNVBAcTB0NPSU1CUkExCzAJBgNVBAoTAlVD
+MQwwCgYDVQQLEwNERUkxCjAIBgNVBAMTAUExEDAOBgkqhkiG9w0BCQEWAUEwHhcN
+MTkwNDI4MTYxODU5WhcNMjAwNDI3MTYxODU5WjBeMQswCQYDVQQGEwJQVDEQMA4G
+A1UECAwHQ09JTUJSQTELMAkGA1UECgwCVUMxDDAKBgNVBAsMA0RFSTEKMAgGA1UE
+AwwBVDEWMBQGCSqGSIb3DQEJARYHVEBULkNPTTCBnzANBgkqhkiG9w0BAQEFAAOB
+jQAwgYkCgYEA8kjbZT1sAJ6iiHSL/BuhCjjfsV26NWPmCgYbwTq48EiSqhcEMSYl
+M8/OLZfUeElvBs/mlL+cewsH57hNtpk41XErhaNf8sHGb5dsPo0PjZwAtit498g1
+5qLgCUzeSE6nlhPLAtv/sC7OVpIM7wS6QfMgE3IS4iOOQk9N6qAYF2ECAwEAAaOB
+gDB+MDEGCCsGAQUFBwEBBCUwIzAhBggrBgEFBQcwAYYVaHR0cDovLzEyNy4wLjAu
+MTo4MDgwMAkGA1UdEwQCMAAwHQYDVR0OBBYEFO2GejZ2yMP8bEAkJdqVqOA4ENu0
+MB8GA1UdIwQYMBaAFBjqaQ91uIFWnDqQ5l6Gh6XY969CMA0GCSqGSIb3DQEBBQUA
+A4GBAFhRnvtSkiyLKurySsrFKwL3gnNFg5DT/m4noFQZAPnvk3eJOiLBDgobbVcp
+KOoIVCD1JMVtgGHc4ObdXLfNui5sYUxOH99ve/AmLPDkki9Xyl/h1QLftY2etvLS
+8/Q/JGJUo4kdAyTmeCUM6AbUAJHTFeaG7BxHI7I5NefcHrQq
+-----END CERTIFICATE-----
